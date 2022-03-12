@@ -10,18 +10,27 @@ from django.http import HttpResponse
 class MoviesView(View):
     def get(self, request):
         movies = Movie.objects.order_by("year")
-        return render(request, "movies.html", context={"movie": movies})
+        return render(request, "movies.html", context={"movies": movies})
 
-    def post(rself, request):
-        title = request.POST.get("movie title")
-        director = request.POST.get("director")
-        screenplay = request.POST.get("screenplay")
-        starring = request.POST.get("starring")
-        year = request.POST.get("year")
-        rating = request.POST.get("rating")
-        genre = request.POST.get("genre")
-        Movie.objects.create(title=title, director=director, screenplay=screenplay, starring=starring, year=year, rating=rating, genre=genre)
-        return render(request, "movies.html")
+    # def post(rself, request):
+        # title = request.POST.get("movie title")
+        # director = request.POST.get("director")
+        # screenplay = request.POST.get("screenplay")
+        # starring = request.POST.get("starring")
+        # year = request.POST.get("year")
+        # rating = request.POST.get("rating")
+        # genre = request.POST.get("genre")
+        # Movie.objects.create(title=title, director=director, screenplay=screenplay, starring=starring, year=year, rating=rating, genre=genre)
+        # return render(request, "movies.html")
+    def post(self, request):
+        type = request.POST.get("sortType")
+        if type == "malejąco":
+            movies = Movie.objects.order_by("-rating")
+            return render(request, "movies.html", context={"movies": movies})
+        elif type == "rosnąco":
+            movies = Movie.objects.order_by("rating")
+            return render(request, "movies.html", context={"movies": movies})
+
 
 class SortDescendingView(View):
     def get(self, request):
@@ -31,8 +40,9 @@ class SortDescendingView(View):
     def post(self, request):
         type = request.POST.get("sortType")
         if type == "malejąco":
-            desc = Movie.objects.order_by("rating")
+            desc = Movie.objects.order_by("rating").desc(nulls_last=True)
             return HttpResponse(request, "movies.html", context={"desc": desc})
+
 
 class SearchMoviesView(View):
     def get(rself, request):

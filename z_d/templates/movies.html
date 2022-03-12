@@ -7,11 +7,13 @@
 <body>
 <table>
     <tr>
-        <th>Film</th>
-        <th>Reżyser</th>
-        <th>Rok</th>
-        <th>Ocena</th>
-        <p><label>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <td><h4>Film</h4></td>
+        <td><h4>Reżyser</h4></td>
+        <td><h4>Rok</h4></td>
+        <td><h4>Ocena</h4></td>
+        <label>
   Sortuj wg oceny:
         </label>
     <input type="submit" name="sortType" value="malejąco">
@@ -19,14 +21,14 @@
     <input type="submit" name="sortType" value="wg. roku produkcji">
 </form>
 
-</label></p>
+</p>
     </tr>
-    {% for movies in movie %}
+    {% for movie in movies %}
     <tr>
-        <td>{{movies.title}}</td>
-        <td>{{movies.director}}</td>
-        <td>{{movies.year}}</td>
-        <td>{{movies.rating}}</td>
+        <td>{{movie.title}}</td>
+        <td>{{movie.director}}</td>
+        <td>{{movie.year}}</td>
+        <td>{{movie.rating}}</td>
 
     </tr>
    {% endfor %}
