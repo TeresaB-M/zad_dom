@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+<p><label>
+  Film:
+  <input type="text"
+         name="title">
+</label></p>
+    <p><label>
+  Imię Osoby:
+  <input type="text"
+         name="title">
+</label></p>
+
+    <p><label>
+  Nazwisko Osoby:
+  <input type="text"
+         name="title">
+</label></p>
+
+ <p>   <label>
+  Rok od::
+  <input type="text"
+         name="year_from">
+     do:
+  <input type="text"
+         name="year_to">
+</label></p>
+
+     <p>   <label>
+  Ocena od:
+  <input type="text"
+         name="rating_from">
+         do:
+  <input type="text"
+         name="rating_to">
+</label></p>
+
+<p><label>
+  Gatunek:
+     <input type="text"
+         name="genre">
+</label></p>
+<p><label>
+  <input type="submit" value="Szukaj">
+</label></p>
+
+</form>
+<br><br>
+{% block content %}
+    {%  for movie in movies %}
+        {% if movie.title_conteined %}
+            <p{{ movie.title }}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+<br>
+</body>
+</html>

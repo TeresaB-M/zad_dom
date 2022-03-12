@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Film</th>
+        <th>Reżyser</th>
+        <th>Rok</th>
+        <th>Ocena</th>
+        <p><label>
+  Sortuj wg oceny:
+        </label>
+    <input type="submit" name="sortType" value="malejąco">
+    <input type="submit" name="sortType" value="rosnąco">
+    <input type="submit" name="sortType" value="wg. roku produkcji">
+</form>
+
+</label></p>
+    </tr>
+    {% for movies in movie %}
+    <tr>
+        <td>{{movies.title}}</td>
+        <td>{{movies.director}}</td>
+        <td>{{movies.year}}</td>
+        <td>{{movies.rating}}</td>
+
+    </tr>
+   {% endfor %}
+</table>
+</body>
+</html>
