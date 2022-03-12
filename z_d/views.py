@@ -26,10 +26,11 @@ class MoviesView(View):
         type = request.POST.get("sortType")
         if type == "malejąco":
             movies = Movie.objects.order_by("-rating")
-            return render(request, "movies.html", context={"movies": movies})
         elif type == "rosnąco":
             movies = Movie.objects.order_by("rating")
-            return render(request, "movies.html", context={"movies": movies})
+        else:
+            movies = Movie.objects.order_by("year")
+        return render(request, "movies.html", context={"movies": movies})
 
 
 class SortDescendingView(View):
