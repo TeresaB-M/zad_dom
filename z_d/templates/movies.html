@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+{#    <link rel="stylesheet" href="style.css">#}
 </head>
+
 <body>
-<table>
-    <tr>
+
     <form action="" method="POST">
         {% csrf_token %}
-        <td><h4>Film</h4></td>
-        <td><h4>Reżyser</h4></td>
-        <td><h4>Rok</h4></td>
-        <td><h4>Ocena</h4></td>
         <label>
+            <br><br>
         Sortuj wg oceny:
         </label>
         <input type="submit" name="sortType" value="malejąco">
@@ -22,19 +20,38 @@
         Sortuj wg:
         </label>
         <input type="submit" name="sortType" value="wg. roku produkcji">
-</form>
+        <br><br><br>
+    </form>
+<style>
+table {
+    border-collapse: collapse;
+    border:2px solid #999;
+}
+table td, table th, table tr{
+    border-collapse: collapse;
+    border:1px solid #999;
+}
+</style>
+<table>
+  <tr>
+    <th>Film</th>
+    <th>Reżyser</th>
+    <th>Rok</th>
+    <th>Ocena</th>
+  </tr>
 
-</p>
-    </tr>
     {% for movie in movies %}
-    <tr>
-        <td>{{movie.title}}</td>
-        <td>{{movie.director}}</td>
-        <td>{{movie.year}}</td>
-        <td>{{movie.rating}}</td>
+  <tr>
+    <td>{{movie.title}}</td>
+    <td>{{movie.director}}</td>
+    <td>{{movie.year}}</td>
+    <td>{{movie.rating}}</td>
+    <td><input type="submit" name="delete_movie" value="delete movie"></td>
+  </tr>
+    {% endfor %}
 
-    </tr>
-   {% endfor %}
 </table>
+
+
 </body>
 </html>

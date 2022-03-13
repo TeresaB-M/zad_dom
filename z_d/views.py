@@ -1,16 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
-from .models import Movie
-from django.template import RequestContext
-from .models import Person
-from .models import Genre
+from .models import Person, Genre, Movie
 from django.http import HttpResponse
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+# from django.template import RequestContext
 
 class MoviesView(View):
     def get(self, request):
         movies = Movie.objects.order_by("year")
-        return render(request, "movies.html", context={"movies": movies})
+        # return render(request, 'movies.html', context={"movies": movies})
+        return redirect(request, 'films', context={"movies": movies})
 
     # def post(rself, request):
         # title = request.POST.get("movie title")
@@ -22,6 +22,7 @@ class MoviesView(View):
         # genre = request.POST.get("genre")
         # Movie.objects.create(title=title, director=director, screenplay=screenplay, starring=starring, year=year, rating=rating, genre=genre)
         # return render(request, "movies.html")
+
     def post(self, request):
         type = request.POST.get("sortType")
         if type == "malejąco":
@@ -57,5 +58,13 @@ class SearchMoviesView(View):
         movies = Movie.objects.all()
         if title:
             movies.filter(title__contains=title)
-        return render(request, "search_movie.html", context = {"movies": movies})
+        return render(request, "search_movie.html", context={"movies": movies})
 
+
+class DeleteMovie(View):
+    pass
+
+
+
+class DeletePerson(View):
+    pass

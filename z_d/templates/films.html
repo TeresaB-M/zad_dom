@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <td><h4>Film</h4></td>
+        <td><h4>Reżyser</h4></td>
+        <td><h4>Rok</h4></td>
+        <td><h4>Ocena</h4></td>
+        <label>
+        Sortuj wg oceny:
+        </label>
+        <input type="submit" name="sortType" value="malejąco">
+        <input type="submit" name="sortType" value="rosnąco">
+        <label><br><br>
+        Sortuj wg:
+        </label>
+        <input type="submit" name="sortType" value="wg. roku produkcji">
+</form>
+
+</p>
+    </tr>
+    {% for movie in movies %}
+    <tr>
+        <td>{{movie.title}}</td>
+        <td>{{movie.director}}</td>
+        <td>{{movie.year}}</td>
+        <td>{{movie.rating}}</td>
+
+    </tr>
+   {% endfor %}
+</table>
+</body>
+</html>
