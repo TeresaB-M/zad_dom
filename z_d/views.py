@@ -10,7 +10,7 @@ class MoviesView(View):
     def get(self, request):
         movies = Movie.objects.order_by("year")
         # return render(request, 'movies.html', context={"movies": movies})
-        return redirect(request, 'films', context={"movies": movies})
+        return render(request, "movies.html", context={"movies": movies})
 
     # def post(rself, request):
         # title = request.POST.get("movie title")
@@ -62,7 +62,10 @@ class SearchMoviesView(View):
 
 
 class DeleteMovie(View):
-    pass
+    def get(self, request, id_movie):
+        movie = Movie.objects.get(id=id_movie)
+        movie.delete()
+        return redirect("delete_movie")
 
 
 
